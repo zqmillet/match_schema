@@ -3,11 +3,11 @@ import inspect
 import astunparse
 import yaml
 
-from tester.utilities.constant import SCHEMA_KEY
-from tester.utilities.common import get_object_from_expression
-from tester.utilities.exception import AssertionException
-from tester.utilities.exception import EnumerationException
-from tester.utilities.exception import TypeMismatchException
+from .constants import SCHEMA_KEY
+from .exceptions import AssertionException 
+from .exceptions import EnumerationException
+from .exceptions import TypeMismatchException
+from .exceptions import MissingPropertyException
 
 def __instantiate_assertion(schema):
     '''
@@ -144,7 +144,7 @@ def __get_types(schema):
                           - float
     return:
         type: tuple
-        description: 返回数据类型构成的一个元组.
+        description: tuple which contains types.
         items:
             type: type
     author: qiqi
@@ -205,7 +205,7 @@ def __match_schema(data, schema, parents, name):
 
         for property_name, property_schema in schema[SCHEMA_KEY.PROPERTIES].items():
             if property_schema.get(SCHEMA_KEY.REQUIRED, True) and property_name not in data:
-                return Miss
+                return Missing
 
 def match_schema(data, schema, name = 'variable'):
     schema = yaml.load(schema, Loader = yaml.SafeLoader)
