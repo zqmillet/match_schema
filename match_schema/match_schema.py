@@ -77,7 +77,7 @@ def __instantiate_type(schema):
                     required: false
     return:
         type: None
-        description: 本函数无返回值, 而是直接修改 schema 的内容.
+        description: this function return nothing, it only change the schema.
     '''
 
     if not schema:
@@ -120,24 +120,24 @@ def __test_enumeration(data, name, enumeration, parents):
     
 def __get_types(schema):
     '''
-    description: 这个函数是用来将 schema 的 type 字段, 由 str 类型实例化成 tuple 类型. 便于以后的运算.
+    description: this function is used to convert the type fields of the schema into tuple.
     arguments:
         schema:
             type: dict
-            description: 数据定义 schema.
+            description: schema of data.
             properties:
                 type:
                     type:
                         - str
                         - list
-                    description: 数据定义 schema 的 type 字段, 本身是一段 python 代码.
+                    description: type of data.
                     required: true
                     items:
                         type: str
                     examples:
                         - str
                         - int
-                        - type(None)
+                        - None
                         - any
                         - testet.utilities.argumet_parser:ArgumentParser
                         - - int
