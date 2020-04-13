@@ -1,4 +1,7 @@
-class AssertionException(Exception):
+class MatchSchemaException(Exception):
+    pass
+
+class AssertionException(MatchSchemaException):
     def __init__(self, name, value, assertion_expression):
         super().__init__(
             '{name} = {value}, cannot pass the assertion {assertion_expression}'.format(
@@ -8,7 +11,7 @@ class AssertionException(Exception):
             )
         )
 
-class EnumerationException(Exception):
+class EnumerationException(MatchSchemaException):
     def __init__(self, name, value, enumeration):
         super().__init__(
             '{name} = {value}, is not in the enumeration {enumeration}'.format(
@@ -18,7 +21,7 @@ class EnumerationException(Exception):
             )    
         )
 
-class TypeMismatchException(Exception):
+class TypeMismatchException(MatchSchemaException):
     def __init__(self, name, real_type, expected_types):
         super().__init__(
             'the type of {name} should be {expected_types}, but it was {real_type}'.format(
@@ -28,7 +31,7 @@ class TypeMismatchException(Exception):
             )
         )
 
-class MissingPropertyException(Exception):
+class MissingPropertyException(MatchSchemaException):
     def __init__(self, name, property_name):
         super().__init__(
             'cannot find property {property_name} in {name}'.format(
