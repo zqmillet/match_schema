@@ -28,8 +28,3 @@ def test3():
     data = 3
     exception = match_schema(schema = schema, data = data)
     assert exception is None
-
-if __name__ == '__main__':
-    test1()
-    test2()
-    test3()
