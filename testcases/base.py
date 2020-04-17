@@ -47,3 +47,7 @@ def test5():
 
     exception = match_schema(schema = schema, data = data)
     assert isinstance(exception, MatchSchemaException)
+
+def test6():
+    schema = '''
+    '''
