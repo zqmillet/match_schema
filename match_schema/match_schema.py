@@ -205,7 +205,10 @@ def __match_schema(data, schema, parents, name):
 
         for property_name, property_schema in schema[SCHEMA_KEY.PROPERTIES].items():
             if property_schema.get(SCHEMA_KEY.REQUIRED, True) and property_name not in data:
-                return Missing
+                return MissingPropertyException(name = name, property_name = property_name)
+    elif isinstance(data, list):
+        if SCHEMA_KEY.ITEMS not in schema:
+            return None
 
 def match_schema(data, schema, name = 'variable'):
     schema = yaml.load(schema, Loader = yaml.SafeLoader)
