@@ -210,6 +210,13 @@ def __match_schema(data, schema, parents, name):
         if SCHEMA_KEY.ITEMS not in schema:
             return None
 
+        for item in data:
+            exception = __match_schema(data = item, schema = schema[SCHEMA_KEY.ITEMS], parents = parents, name = name)
+            if exception:
+                return exception
+    else:
+        pass
+
 def match_schema(data, schema, name = 'variable'):
     schema = yaml.load(schema, Loader = yaml.SafeLoader)
 
